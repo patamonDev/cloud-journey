@@ -15,6 +15,13 @@ locals {
     staging_env = "dev"
 }
 
+# Create random string for tfstate
+resource "random_string" "resource_code" {
+  length = 10
+  special = false
+  upper = false
+}
+
 # Create RG
 resource "azurerm_resource_group" "rg" {
   name = var.resource_group_name
@@ -31,10 +38,18 @@ resource "azurerm_storage_account" "tf_core_storage" {
   location = var.location
   account_tier = "Standard"
   account_replication_type = "LRS"
+  allow_nested_items_to_be_public = false
 
   tags = {
     Environment = local.staging_env
   }
 
   depends_on = [ azurerm_resource_group.rg ]
+}
+
+# Create container inside of storage account
+resource "azurerm_storage_container" "tfstate" {
+  name = "tfstate"
+  storage_account_name = azurerm_storage_account.tf_core_storage.name
+  container_access_type = "private"
 }
