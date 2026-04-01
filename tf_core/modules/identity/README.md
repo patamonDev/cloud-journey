@@ -1,0 +1,1 @@
+Custom Terraform module that deploys identity management resources in my Azure RG

@@ -31,6 +31,17 @@ resource "azurerm_resource_group" "rg" {
   }
 }
 
+# Module that creates the VNet, subnet, and NIC for my RG resources
+module "network_config" {
+  source = "./modules/network"
+  nic_name = "tf-core-nic"
+  location = var.location
+  addy_space = "10.17.0.0/16"
+  vnet_name = "tf-core-vnet"
+  sn_name = "tf-core-subnet"
+  sn_prefix = "10.17.0.1/24"
+}
+
 # Create Storage Account
 resource "azurerm_storage_account" "tf_core_storage" {
   name = var.storage_account_name
