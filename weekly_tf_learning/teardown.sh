@@ -4,7 +4,7 @@
 tofu destroy -auto-approve
 
 # Remove the tfstate file and the .hcl file
-rm -rf .terraform && rm -f .terraform.lock.hcl
+rm -rf .terraform && rm -f .terraform.lock.hcl && rm -f tfplan
 
 # Delete the bootstrapped resources
 RG_NAME="dev-rg-9254"
