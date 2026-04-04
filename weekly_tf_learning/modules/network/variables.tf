@@ -7,7 +7,7 @@ variable "vnet_name" {
   }
 }
 
-variable "address_list" {
+variable "cidr_block" {
   type = list(string)
   description = "Address space for your VNet"
 }
@@ -22,12 +22,22 @@ variable "rg_name" {
   description = "RG name"
 }
 
-variable "sn_name" {
+variable "sn_name_one" {
   type = string
   description = "SN Name"
 }
 
-variable "sn_prefix" {
+variable "sn_prefix_one" {
   type = list(string)
   description = "SN Prefix"
+}
+
+variable "sn_name_two" {
+  type = string
+  description = "SN Name for the second subnet"
+}
+
+variable "sn_prefix_two" {
+  type = list(string)
+  description = "SN Prefix for the second subnet"
 }
